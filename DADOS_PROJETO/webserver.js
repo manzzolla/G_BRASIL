@@ -7,7 +7,7 @@ app.use(bodyParser.json());
 // Configurar a conexão com o banco de dados PostgreSQL
 const pool = new Pool({
   user: 'banco_de_dados_escola_user', // Altere para o seu nome de usuário
-  host: 'postgres://banco_de_dados_escola_user:OT3KvnLC880SWkCIWPwiftUYvJpUVS9h@dpg-ckjjl99jrl0c73dfbakg-a.oregon-postgres.render.com/banco_de_dados_escola', // Altere para o host do seu banco de dados
+  host: 'dpg-ckjjl99jrl0c73dfbakg-a', // Altere para o host do seu banco de dados
   database: 'banco_de_dados_escola', // Nome do banco de dados
   password: 'OT3KvnLC880SWkCIWPwiftUYvJpUVS9h', // Altere para a sua senha
   port: 5432 // Porta padrão do PostgreSQL
