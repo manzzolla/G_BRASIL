@@ -18,7 +18,7 @@ axios.get(`${apiUrl}/alunos`)
   });
 
 
-app.use(bodyParser.json());
+// app.use(bodyParser.json()); retirado
 
 // Configuração da conexão com o banco de dados
 const pool = new Pool({
