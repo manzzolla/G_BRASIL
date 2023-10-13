@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const { Pool } = require('pg');
 const app = express();
-app.use(bodyParser.json());
+app.use(express.static('public'));
 
 // Configurar a conexão com o banco de dados PostgreSQL
 const pool = new Pool({
