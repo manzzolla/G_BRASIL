@@ -17,12 +17,20 @@ const server = app.listen(3000, () => {
   console.log('Servidor Node.js rodando na porta 3000');
 });
 
-// Trate o encerramento do servidor
+// Trate o encerramento do servidor e da conexão com o banco de dados
 process.on('SIGINT', () => {
   console.log('Encerrando o servidor...');
   server.close(() => {
     console.log('Servidor encerrado.');
+    pool.end((err) => {
+      if (err) {
+        console.error('Erro ao encerrar a conexão com o banco de dados:', err);
+      } else {
+        console.log('Conexão com o banco de dados encerrada.');
+      }
+    });
   });
 });
+
 
 
