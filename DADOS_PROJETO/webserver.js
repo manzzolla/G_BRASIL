@@ -16,18 +16,6 @@ const pool = new Pool({
   port: 5432,
 });
 
-// Adicione a rota para a chamada Axios
-app.get('/chamar-api-alunos', (req, res) => {
-  axios.get(`${apiUrl}/alunos`)
-    .then(response => {
-      res.json(response.data);
-    })
-    .catch(error => {
-      console.error(error);
-      res.status(500).json({ error: 'Erro ao chamar a API de alunos' });
-    });
-});
-
 // Use as rotas dos alunos
 app.use('/alunos', alunosRoutes);
 
