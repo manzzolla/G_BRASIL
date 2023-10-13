@@ -4,8 +4,6 @@ const app = express();
 const { Pool } = require('pg');
 const alunosRoutes = require('./routes/alunos'); // Importe as rotas dos alunos
 
-const axios = require('axios'); // ou import axios from 'axios';
-
 const apiUrl = 'https://escola-db.onrender.com'; // URL da sua API Render
 
 // Configuração da conexão com o banco de dados
@@ -17,8 +15,6 @@ const pool = new Pool({
   port: 5432,
 });
 
-module.exports = pool;
-
 // Use as rotas dos alunos
 app.use('/alunos', alunosRoutes);
 
@@ -27,7 +23,7 @@ const server = app.listen(3000, () => {
   console.log('Servidor Node.js rodando na porta 3000');
 });
 
-// Exemplo de chamada GET
+// Exemplo de chamada GET (agora após a definição do pool)
 axios.get(`${apiUrl}/alunos`)
   .then(response => {
     console.log(response.data);
@@ -50,5 +46,3 @@ process.on('SIGINT', () => {
     });
   });
 });
-
-
