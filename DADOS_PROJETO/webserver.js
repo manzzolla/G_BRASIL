@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
+const { Pool } = require('pg');
 const alunosRoutes = require('./routes/alunos'); // Importe as rotas dos alunos
 
 app.use(bodyParser.json());
