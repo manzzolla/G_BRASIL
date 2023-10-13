@@ -5,7 +5,7 @@ const app = express();
 app.use(express.static('public'));
 
 // Configurar a conexão com o banco de dados PostgreSQL
-const pool = require('config/databaseConfig.js');
+const pool = require('config/databaseConfig');
 
 // Rota para criar um novo aluno
 app.post('/alunos', (req, res) => {
