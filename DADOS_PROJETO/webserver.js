@@ -2,10 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const { Pool } = require('pg');
-const axios = require('axios');
 const alunosRoutes = require('./routes/alunos'); // Importe as rotas dos alunos
 
-const apiUrl = 'https://escola-db.onrender.com'; // URL da sua API Render
 
 // Configuração da conexão com o banco de dados
 const pool = new Pool({
@@ -24,14 +22,6 @@ const server = app.listen(3000, () => {
   console.log('Servidor Node.js rodando na porta 3000');
 });
 
-// Exemplo de chamada GET (agora após a definição do pool)
-axios.get(`${apiUrl}/alunos`)
-  .then(response => {
-    console.log(response.data);
-  })
-  .catch(error => {
-    console.error(error);
-  });
 
 // Trate o encerramento do servidor e da conexão com o banco de dados
 process.on('SIGINT', () => {
