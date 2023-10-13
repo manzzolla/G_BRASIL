@@ -2,6 +2,7 @@
 
 const express = require('express');
 const router = express.Router();
+const axios = require('axios');
 const alunosController = require('../controllers/alunosController');
 
 // Rota para criar um novo aluno
