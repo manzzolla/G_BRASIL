@@ -9,7 +9,7 @@ const axios = require('axios'); // ou import axios from 'axios';
 const apiUrl = 'https://escola-db.onrender.com'; // URL da sua API Render
 
 // Exemplo de chamada GET
-axios.get(`${apiUrl}./routes/alunos`)
+axios.get(`${apiUrl}/alunos`)
   .then(response => {
     console.log(response.data);
   })
