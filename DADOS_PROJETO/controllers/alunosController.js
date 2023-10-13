@@ -9,7 +9,7 @@ const pool = new Pool({
   port: 5432,
 });
 
-module.exports = pool;
+const { Pool } = require('pg');
 
 // Função para criar um novo aluno
 const criarAluno = async (req, res) => {
