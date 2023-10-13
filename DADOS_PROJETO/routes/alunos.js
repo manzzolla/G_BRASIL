@@ -2,7 +2,7 @@
 
 const express = require('express');
 const router = express.Router();
-const alunosController = require('../controllers/alunosController');
+const alunosController = require('./controllers/alunosControllers');
 
 // Rota para criar um novo aluno
 router.post('/', alunosController.criarAluno);
