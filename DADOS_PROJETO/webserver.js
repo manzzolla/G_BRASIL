@@ -15,7 +15,7 @@ const pool = new Pool({
 });
 
 // Use as rotas dos alunos
-app.use('/alunos', alunosRoutes);
+app.use('/routes/alunos', alunosRoutes);
 
 // Inicie o servidor na porta 3000
 const server = app.listen(3000, () => {
