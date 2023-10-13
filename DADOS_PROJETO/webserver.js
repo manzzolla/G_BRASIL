@@ -8,18 +8,6 @@ const axios = require('axios'); // ou import axios from 'axios';
 
 const apiUrl = 'https://escola-db.onrender.com'; // URL da sua API Render
 
-// Exemplo de chamada GET
-axios.get(`${apiUrl}/alunos`)
-  .then(response => {
-    console.log(response.data);
-  })
-  .catch(error => {
-    console.error(error);
-  });
-
-
-// app.use(bodyParser.json()); retirado
-
 // Configuração da conexão com o banco de dados
 const pool = new Pool({
   user: 'banco_de_dados_escola_user',
@@ -39,6 +27,15 @@ const server = app.listen(3000, () => {
   console.log('Servidor Node.js rodando na porta 3000');
 });
 
+// Exemplo de chamada GET
+axios.get(`${apiUrl}/alunos`)
+  .then(response => {
+    console.log(response.data);
+  })
+  .catch(error => {
+    console.error(error);
+  });
+
 // Trate o encerramento do servidor e da conexão com o banco de dados
 process.on('SIGINT', () => {
   console.log('Encerrando o servidor...');
@@ -53,6 +50,5 @@ process.on('SIGINT', () => {
     });
   });
 });
-
 
 
