@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const { Pool } = require('pg');
+const axios = require('axios');
 const alunosRoutes = require('./routes/alunos'); // Importe as rotas dos alunos
 
 const apiUrl = 'https://escola-db.onrender.com'; // URL da sua API Render
