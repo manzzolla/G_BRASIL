@@ -5,13 +5,7 @@ const app = express();
 app.use(express.static('public'));
 
 // Configurar a conexão com o banco de dados PostgreSQL
-const pool = new Pool({
-  user: 'banco_de_dados_escola_user', // Altere para o seu nome de usuário
-  host: 'dpg-ckjjl99jrl0c73dfbakg-a', // Altere para o host do seu banco de dados
-  database: 'banco_de_dados_escola', // Nome do banco de dados
-  password: 'OT3KvnLC880SWkCIWPwiftUYvJpUVS9h', // Altere para a sua senha
-  port: 5432 // Porta padrão do PostgreSQL
-});
+const pool = require('config/databaseConfig.js');
 
 // Rota para criar um novo aluno
 app.post('/alunos', (req, res) => {
