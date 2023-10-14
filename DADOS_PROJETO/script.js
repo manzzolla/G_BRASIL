@@ -2,12 +2,10 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 const fetch = require('node-fetch');
+require = require('esm')(module);
 
 
 app.use(cors());
-
-
-
 
 // Função para criar um novo aluno
 function criarAluno() {
