@@ -4,8 +4,8 @@ const app = express();
 const fetch = require('node-fetch');
 require = require('esm')(module);
 
-
 app.use(cors());
+app.use(express.json());
 
 // Função para criar um novo aluno
 function criarAluno() {
@@ -36,16 +36,13 @@ function criarAluno() {
   })
     .then((response) => response.json())
     .then((novoAluno) => {
-      // Aqui você pode atualizar a tabela ou fazer o que desejar com o novo aluno
       console.log('Novo aluno adicionado:', novoAluno);
-      // Limpe os campos do formulário após adicionar o aluno
       document.getElementById('nome').value = '';
       document.getElementById('idade').value = '';
       document.getElementById('nota1').value = '';
       document.getElementById('nota2').value = '';
       document.getElementById('professor').value = '';
       document.getElementById('sala').value = '';
-      // Chame a função para listar os alunos novamente
       listarAlunos();
     })
     .catch((error) => {
@@ -55,14 +52,12 @@ function criarAluno() {
 
 // Função para listar alunos
 function listarAlunos() {
-  // Faça uma solicitação GET para a API para obter a lista de alunos
   fetch('https://generation-brasil.onrender.com/alunos')
     .then((response) => response.json())
     .then((alunos) => {
-      // Aqui você pode preencher a tabela com os alunos
       const tabela = document.getElementById('alunos-table');
       const tbody = tabela.querySelector('tbody');
-      tbody.innerHTML = ''; // Limpa os dados anteriores
+      tbody.innerHTML = '';
 
       alunos.forEach((aluno) => {
         const row = document.createElement('tr');
@@ -89,13 +84,11 @@ function listarAlunos() {
 
 // Função para excluir um aluno
 function excluirAluno(id) {
-  // Faça uma solicitação DELETE para a API para excluir o aluno com o ID especificado
-  fetch(`sua_url_da_api/alunos/${id}`, {
+  fetch(`https://generation-brasil.onrender.com/alunos/${id}`, {
     method: 'DELETE',
   })
     .then(() => {
       console.log(`Aluno com ID ${id} excluído.`);
-      // Atualize a lista de alunos após a exclusão
       listarAlunos();
     })
     .catch((error) => {
@@ -103,7 +96,13 @@ function excluirAluno(id) {
     });
 }
 
-// Chame a função para listar alunos ao carregar a página
+// Função para editar um aluno
+function editarAluno(id) {
+  // Aqui você pode implementar a lógica para editar um aluno
+  // Pode ser através de um formulário de edição ou outra interface
+  console.log(`Editar aluno com ID ${id}`);
+}
+
 listarAlunos();
 
 app.listen(3000, () => {
