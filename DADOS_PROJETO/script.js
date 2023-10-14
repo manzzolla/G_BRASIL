@@ -58,7 +58,7 @@ function criarAluno() {
 // Função para listar alunos
 function listarAlunos() {
   // Faça uma solicitação GET para a API para obter a lista de alunos
-  fetch('sua_url_da_api/alunos')
+  fetch('https://generation-brasil.onrender.com/alunos')
     .then((response) => response.json())
     .then((alunos) => {
       // Aqui você pode preencher a tabela com os alunos
