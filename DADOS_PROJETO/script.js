@@ -1,78 +1,85 @@
-// Exemplo de dados iniciais (pode ser carregado a partir da API)
-let alunos = [];
+// Função para carregar a lista de alunos
+async function listarAlunos() {
+  try {
+    const response = await fetch('/api/alunos'); // Rota para listar alunos
+    if (!response.ok) {
+      throw new Error('Erro ao listar alunos');
+    }
+    const alunos = await response.json();
+    const tabela = document.getElementById('alunos-table');
+    tabela.innerHTML = ''; // Limpa a tabela
 
-// Função para adicionar um aluno
-function adicionarAluno() {
-  const nome = document.getElementById("nome").value;
-  const idade = document.getElementById("idade").value;
-  const nota1 = document.getElementById("nota1").value;
-  const nota2 = document.getElementById("nota2").value;
-  const professor = document.getElementById("professor").value;
-  const sala = document.getElementById("sala").value;
+    alunos.forEach((aluno) => {
+      const row = tabela.insertRow();
+      row.innerHTML = `
+        <td>${aluno.id}</td>
+        <td>${aluno.nome}</td>
+        <td>${aluno.idade}</td>
+        <td>${aluno.nota_primeiro_semestre}</td>
+        <td>${aluno.nota_segundo_semestre}</td>
+        <td>${aluno.nome_professor}</td>
+        <td>${aluno.sala}</td>
+        <td><button onclick="excluirAluno(${aluno.id})">Excluir</button></td>
+      `;
+    });
+  } catch (error) {
+    console.error('Erro ao listar alunos:', error);
+  }
+}
 
-  // Valide os dados aqui, certificando-se de que não sejam nulos, vazios, etc.
+// Função para adicionar um novo aluno
+async function adicionarAluno() {
+  const nome = document.getElementById('nome').value;
+  const idade = document.getElementById('idade').value;
+  const nota1 = document.getElementById('nota1').value;
+  const nota2 = document.getElementById('nota2').value;
+  const professor = document.getElementById('professor').value;
+  const sala = document.getElementById('sala').value;
 
   const novoAluno = {
     nome,
     idade,
-    nota1,
-    nota2,
-    professor,
+    nota_primeiro_semestre: nota1,
+    nota_segundo_semestre: nota2,
+    nome_professor: professor,
     sala,
   };
 
-  // Adicione o novo aluno à lista
-  alunos.push(novoAluno);
+  try {
+    const response = await fetch('/api/alunos', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(novoAluno),
+    });
 
-  // Limpe os campos de entrada
-  document.getElementById("nome").value = "";
-  document.getElementById("idade").value = "";
-  document.getElementById("nota1").value = "";
-  document.getElementById("nota2").value = "";
-  document.getElementById("professor").value = "";
-  document.getElementById("sala").value = "";
+    if (!response.ok) {
+      throw new Error('Erro ao adicionar aluno');
+    }
 
-  // Atualize a tabela
-  listarAlunos();
-}
-
-// Função para listar os alunos na tabela
-function listarAlunos() {
-  const tabela = document.getElementById("alunos-table");
-  const tbody = tabela.querySelector("tbody");
-
-  // Limpe a tabela
-  tbody.innerHTML = "";
-
-  // Preencha a tabela com os dados dos alunos
-  alunos.forEach((aluno, index) => {
-    const row = document.createElement("tr");
-    row.innerHTML = `
-      <td>${index}</td>
-      <td>${aluno.nome}</td>
-      <td>${aluno.idade}</td>
-      <td>${aluno.nota1}</td>
-      <td>${aluno.nota2}</td>
-      <td>${aluno.professor}</td>
-      <td>${aluno.sala}</td>
-      <td><button onclick="excluirAluno(${index})">Excluir</button></td>
-    `;
-    tbody.appendChild(row);
-  });
+    listarAlunos(); // Atualiza a lista de alunos após a adição
+  } catch (error) {
+    console.error('Erro ao adicionar aluno:', error);
+  }
 }
 
 // Função para excluir um aluno
-function excluirAluno(index) {
-  alunos.splice(index, 1);
-  listarAlunos();
+async function excluirAluno(id) {
+  try {
+    const response = await fetch(`/api/alunos/${id}`, {
+      method: 'DELETE',
+    });
+
+    if (!response.ok) {
+      throw new Error('Erro ao excluir aluno');
+    }
+
+    listarAlunos(); // Atualiza a lista de alunos após a exclusão
+  } catch (error) {
+    console.error('Erro ao excluir aluno:', error);
+  }
 }
 
-// Liste os alunos iniciais (se necessário)
+// Carrega a lista de alunos ao iniciar a página
 listarAlunos();
-
-// Adicione um ouvinte de evento para o formulário de adicionar aluno
-const form = document.getElementById("add-aluno-form");
-form.addEventListener("submit", function (e) {
-  e.preventDefault(); // Impede o envio do formulário
-  adicionarAluno();
-});
