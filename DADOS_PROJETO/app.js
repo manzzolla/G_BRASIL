@@ -4,6 +4,8 @@ const app = express();
 const port = process.env.PORT || 3000;
 app.use(express.json());
 
+
+// Define a rota para a página inicial
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
@@ -15,71 +17,94 @@ const pool = new Pool({
   }
 });
 
-const alunosTable = document.getElementById('alunos-table');
-const addAlunoForm = document.getElementById('add-aluno-form');
-
-// Função para listar alunos
-async function listarAlunos() {
-  const response = await fetch('https://escola-db.onrender.com/alunos');
-  const alunos = await response.json();
-
-  // Preencher a tabela
-  const tbody = alunosTable.querySelector('tbody');
-  tbody.innerHTML = '';
-
-  alunos.forEach((aluno) => {
-    const row = document.createElement('tr');
-    row.innerHTML = `
-      <td>${aluno.id}</td>
-      <td>${aluno.nome}</td>
-      <td>${aluno.idade}</td>
-      <td>${aluno.nota_primeiro_semestre}</td>
-      <td>${aluno.nota_segundo_semestre}</td>
-      <td>${aluno.nome_professor}</td>
-      <td>${aluno.sala}</td>
-      <td>
-        <button class="editar-aluno" data-id="${aluno.id}">Editar</button>
-        <button class="excluir-aluno" data-id="${aluno.id}">Excluir</button>
-      </td>
-    `;
-
-    tbody.appendChild(row);
-  });
-}
-
-// Evento de envio do formulário para adicionar aluno
-addAlunoForm.addEventListener('submit', async (e) => {
-  e.preventDefault();
-
-  const nome = document.getElementById('nome').value;
-  const idade = document.getElementById('idade').value;
-  const nota1 = document.getElementById('nota1').value;
-  const nota2 = document.getElementById('nota2').value;
-  const professor = document.getElementById('professor').value;
-  const sala = document.getElementById('sala').value;
-
-  // Faça uma solicitação POST para adicionar o aluno
-  const response = await fetch('https://escola-db.onrender.com/alunos', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      nome,
-      idade,
-      nota_primeiro_semestre: nota1,
-      nota_segundo_semestre: nota2,
-      nome_professor: professor,
-      sala,
-    }),
-  });
-
-  // Limpe o formulário após a adição do aluno
-  addAlunoForm.reset();
-
-  // Atualize a tabela
-  listarAlunos();
+app.get('/alunos', async (req, res) => {
+  try {
+    const client = await pool.connect();
+    const result = await client.query('SELECT * FROM alunos');
+    const alunos = result.rows;
+    client.release();
+    res.json(alunos);
+  } catch (error) {
+    console.error('Erro ao buscar alunos no banco de dados:', error);
+    res.status(500).json({ error: 'Erro ao buscar alunos no banco de dados' });
+  }
 });
 
-// Carregue a lista de alunos no início
-listarAlunos();
+app.post('/alunos', async (req, res) => {
+  try {
+    const { nome, idade, nota_primeiro_semestre, nota_segundo_semestre, nome_professor, sala } = req.body;
+    const query = 'INSERT INTO alunos (nome, idade, nota_primeiro_semestre, nota_segundo_semestre, nome_professor, sala) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *';
+    const values = [nome, idade, nota_primeiro_semestre, nota_segundo_semestre, nome_professor, sala];
+
+    const client = await pool.connect();
+    const result = await client.query(query, values);
+    const novoAluno = result.rows[0];
+    client.release();
+    res.status(201).json(novoAluno);
+  } catch (error) {
+    console.error('Erro ao adicionar aluno:', error);
+    res.status(500).json({ error: 'Erro ao adicionar aluno' });
+  }
+});
+
+app.get('/alunos/:id', async (req, res) => {
+  try {
+    const alunoId = req.params.id;
+    const client = await pool.connect();
+    const result = await client.query('SELECT * FROM alunos WHERE id = $1', [alunoId]);
+    const aluno = result.rows[0];
+    client.release();
+    if (aluno) {
+      res.json(aluno);
+    } else {
+      res.status(404).json({ message: 'Aluno não encontrado' });
+    }
+  } catch (error) {
+    console.error('Erro ao buscar aluno por ID:', error);
+    res.status(500).json({ error: 'Erro ao buscar aluno por ID' });
+  }
+});
+
+app.put('/alunos/:id', async (req, res) => {
+  try {
+    const alunoId = req.params.id;
+    const { nome, idade, nota_primeiro_semestre, nota_segundo_semestre, nome_professor, sala } = req.body;
+    const query = 'UPDATE alunos SET nome = $1, idade = $2, nota_primeiro_semestre = $3, nota_segundo_semestre = $4, nome_professor = $5, sala = $6 WHERE id = $7 RETURNING *';
+    const values = [nome, idade, nota_primeiro_semestre, nota_segundo_semestre, nome_professor, sala, alunoId];
+
+    const client = await pool.connect();
+    const result = await client.query(query, values);
+    const alunoAtualizado = result.rows[0];
+    client.release();
+    if (alunoAtualizado) {
+      res.json(alunoAtualizado);
+    } else {
+      res.status(404).json({ message: 'Aluno não encontrado' });
+    }
+  } catch (error) {
+    console.error('Erro ao atualizar aluno:', error);
+    res.status(500).json({ error: 'Erro ao atualizar aluno' });
+  }
+});
+
+app.delete('/alunos/:id', async (req, res) => {
+  try {
+    const alunoId = req.params.id;
+    const client = await pool.connect();
+    const result = await client.query('DELETE FROM alunos WHERE id = $1 RETURNING *', [alunoId]);
+    const alunoRemovido = result.rows[0];
+    client.release();
+    if (alunoRemovido) {
+      res.json(alunoRemovido);
+    } else {
+      res.status(404).json({ message: 'Aluno não encontrado' });
+    }
+  } catch (error) {
+    console.error('Erro ao excluir aluno:', error);
+    res.status(500).json({ error: 'Erro ao excluir aluno' });
+  }
+});
+
+app.listen(port, () => {
+  console.log(`API está rodando na porta ${port}`);
+});
