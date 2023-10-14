@@ -1,7 +1,9 @@
+const axios = require('axios');
+
 // Função para carregar a lista de alunos
 async function listarAlunos() {
   try {
-    const response = await fetch('/api/alunos'); // Rota para listar alunos
+    const response = await axios.get('/api/alunos'); // Rota para listar alunos
     if (!response.ok) {
       throw new Error('Erro ao listar alunos');
     }
