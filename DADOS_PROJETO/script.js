@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
+const fetch = require('node-fetch');
 
 
 app.use(cors());
@@ -28,7 +29,7 @@ function criarAluno() {
   };
 
   // Faça uma solicitação POST para a API para adicionar o aluno
-  fetch('sua_url_da_api/alunos', {
+  fetch('https://generation-brasil.onrender.com/alunos', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
