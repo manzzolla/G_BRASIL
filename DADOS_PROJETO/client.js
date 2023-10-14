@@ -1,37 +1,7 @@
-// Função para listar alunos da API
-function listarAlunos() {
-    fetch('https://generation-brasil.onrender.com/alunos')
-      .then((response) => response.json())
-      .then((alunos) => {
-        const tabela = document.getElementById('alunos-table');
-        const tbody = tabela.querySelector('tbody');
-        tbody.innerHTML = '';
-  
-        alunos.forEach((aluno) => {
-          const row = document.createElement('tr');
-          row.innerHTML = `
-            <td>${aluno.id}</td>
-            <td>${aluno.nome}</td>
-            <td>${aluno.idade}</td>
-            <td>${aluno.nota_primeiro_semestre}</td>
-            <td>${aluno.nota_segundo_semestre}</td>
-            <td>${aluno.nome_professor}</td>
-            <td>${aluno.sala}</td>
-            <td>
-              <button onclick="editarAluno(${aluno.id})">Editar</button>
-              <button onclick="excluirAluno(${aluno.id})">Excluir</button>
-            </td>
-          `;
-          tbody.appendChild(row);
-        });
-      })
-      .catch((error) => {
-        console.error('Erro ao listar alunos:', error);
-      });
-  }
-  
-  // Função para adicionar um novo aluno
-  function adicionarAluno() {
+// Código do lado do cliente (client.js)
+
+// Função para criar um novo aluno
+function criarAluno() {
     const nome = document.getElementById('nome').value;
     const idade = parseInt(document.getElementById('idade').value);
     const nota1 = parseFloat(document.getElementById('nota1').value);
@@ -71,6 +41,38 @@ function listarAlunos() {
       });
   }
   
+  // Função para listar alunos
+  function listarAlunos() {
+    fetch('https://generation-brasil.onrender.com/alunos')
+      .then((response) => response.json())
+      .then((alunos) => {
+        const tabela = document.getElementById('alunos-table');
+        const tbody = tabela.querySelector('tbody');
+        tbody.innerHTML = '';
+  
+        alunos.forEach((aluno) => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${aluno.id}</td>
+            <td>${aluno.nome}</td>
+            <td>${aluno.idade}</td>
+            <td>${aluno.nota_primeiro_semestre}</td>
+            <td>${aluno.nota_segundo_semestre}</td>
+            <td>${aluno.nome_professor}</td>
+            <td>${aluno.sala}</td>
+            <td>
+              <button onclick="editarAluno(${aluno.id})">Editar</button>
+              <button onclick="excluirAluno(${aluno.id})">Excluir</button>
+            </td>
+          `;
+          tbody.appendChild(row);
+        });
+      })
+      .catch((error) => {
+        console.error('Erro ao listar alunos:', error);
+      });
+  }
+  
   // Função para excluir um aluno
   function excluirAluno(id) {
     fetch(`https://generation-brasil.onrender.com/alunos/${id}`, {
@@ -82,11 +84,14 @@ function listarAlunos() {
       })
       .catch((error) => {
         console.error(`Erro ao excluir aluno com ID ${id}:`, error);
-      });
+      }
+    );
   }
   
   // Função para editar um aluno (você pode implementar essa lógica)
   function editarAluno(id) {
+    // Aqui você pode implementar a lógica para editar um aluno
+    // Pode ser através de um formulário de edição ou outra interface
     console.log(`Editar aluno com ID ${id}`);
   }
   
