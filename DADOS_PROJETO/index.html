@@ -1,45 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>API Postman</title>
+  <title>Banco de Dados da Escola Generation Brasil</title>
 </head>
 <body>
-    <h1>Exemplo de Interação com API do Postman</h1>
-    <button id="fetchData">Buscar Dados</button>
-    <p id="response"></p>
-
-    <script>
-        // Função para buscar dados da coleção do Postman
-        function fetchData() {
-            const apiKey = "PMAT-01HCR4AVBG07BY7SGBVE7QANNG"; // Sua chave de acesso
-
-            // Endpoint da coleção no Postman
-            const collectionEndpoint = "https://api.postman.com/collections/30472639-e8eb6ff9-8a69-4737-801a-d1df48925864";
-
-            // Configuração da solicitação
-            const requestOptions = {
-                method: 'GET',
-                headers: {
-                    'X-Api-Key': apiKey
-                }
-            };
-
-            // Faz a solicitação HTTP para a coleção no Postman
-            fetch(collectionEndpoint, requestOptions)
-                .then(response => response.json())
-                .then(data => {
-                    // Manipula os dados da resposta
-                    document.getElementById('response').innerHTML = JSON.stringify(data, null, 2);
-                })
-                .catch(error => {
-                    document.getElementById('response').innerHTML = 'Erro: ' + error;
-                });
-        }
-
-        // Adiciona um ouvinte de evento para o botão
-        document.getElementById('fetchData').addEventListener('click', fetchData);
-    </script>
+  <!-- Elementos da interface do usuário -->
+  <script src="client.js"></script>
 </body>
 </html>
-
-
