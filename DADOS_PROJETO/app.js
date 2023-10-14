@@ -4,6 +4,10 @@ const app = express();
 const port = process.env.PORT || 3000;
 app.use(express.json());
 
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/index.html');
+});
+
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL || 'postgres://banco_de_dados_escola_user:OT3KvnLC880SWkCIWPwiftUYvJpUVS9h@dpg-ckjjl99jrl0c73dfbakg-a.oregon-postgres.render.com/banco_de_dados_escola',
   ssl: {
