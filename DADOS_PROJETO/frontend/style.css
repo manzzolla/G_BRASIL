@@ -1,0 +1,89 @@
+/* Estilos gerais da página */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+  }
+  
+  h1 {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    margin: 0;
+  }
+  
+  /* Estilos do formulário para adicionar alunos */
+  form {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    margin: 20px;
+    border-radius: 5px;
+  }
+  
+  form input {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  form button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Estilos da tabela de alunos */
+  table {
+    width: 100%;
+    background-color: #fff;
+    border-collapse: collapse;
+    margin: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  table th, table td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ccc;
+  }
+  
+  table th {
+    background-color: #333;
+    color: #fff;
+  }
+  
+  table tbody tr:nth-child(odd) {
+    background-color: #f0f0f0;
+  }
+  
+  /* Estilos dos botões de ação na tabela */
+  button.editar-aluno {
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 5px 10px;
+    margin-right: 5px;
+  }
+  
+  button.excluir-aluno {
+    background-color: #f44336;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 5px 10px;
+  }
+  

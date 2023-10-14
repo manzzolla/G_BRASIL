@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+  <h1>Gerenciamento de Alunos</h1>
+
+  <!-- Formulário para adicionar aluno -->
+  <form id="add-aluno-form">
+    <input type="text" id="nome" placeholder="Nome do Aluno">
+    <input type="number" id="idade" placeholder="Idade">
+    <input type="number" id="nota1" placeholder="Nota 1º Semestre">
+    <input type="number" id="nota2" placeholder="Nota 2º Semestre">
+    <input type="text" id="professor" placeholder="Nome do Professor">
+    <input type="text" id="sala" placeholder="Número da Sala">
+    <button type="submit">Adicionar Aluno</button>
+  </form>
+
+  <!-- Tabela para listar alunos -->
+  <table id="alunos-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Idade</th>
+        <th>Nota 1º Semestre</th>
+        <th>Nota 2º Semestre</th>
+        <th>Professor</th>
+        <th>Sala</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Dados da tabela serão preenchidos via JavaScript -->
+    </tbody>
+  </table>
+
+  <script src="script.js"></script>
+</body>
+</html>
