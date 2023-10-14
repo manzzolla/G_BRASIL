@@ -2,10 +2,10 @@
   "name": "app",
   "version": "1.0.0",
   "description": "Banco de dados da escola de alunos Generation Brasil",
-  "main": "scrpit.js",
+  "main": "script.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node scrpit.js"
+    "start": "node script.js"
   },
   "repository": {
     "type": "git",
