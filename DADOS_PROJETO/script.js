@@ -1,3 +1,13 @@
+const express = require('express');
+const cors = require('cors');
+const app = express();
+
+
+app.use(cors());
+
+
+
+
 // Função para criar um novo aluno
 function criarAluno() {
   const nome = document.getElementById('nome').value;
@@ -96,3 +106,7 @@ function excluirAluno(id) {
 
 // Chame a função para listar alunos ao carregar a página
 listarAlunos();
+
+app.listen(3000, () => {
+  console.log('API está rodando na porta 3000');
+});
