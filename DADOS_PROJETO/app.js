@@ -1,6 +1,13 @@
+const express = require('express');
+const app = express();
+const port = process.env.PORT || 3000;
+
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/index.html');
+
 // Obtém a lista de alunos do servidor e exibe-os na página
 function carregarAlunos() {
-    fetch('/alunos')
+    fetch('https://escola-db.onrender.com/alunos')
         .then((response) => response.json())
         .then((alunos) => {
             const listaAlunos = document.querySelector('#alunos-list ul');
@@ -17,8 +24,7 @@ function carregarAlunos() {
         });
 }
 
-// Chama a função para carregar alunos quando a página carrega
-window.addEventListener('load', carregarAlunos);
+
 
 
 // Manipula o formulário de adicionar/editar aluno
