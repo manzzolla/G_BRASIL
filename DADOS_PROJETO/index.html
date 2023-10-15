@@ -1,10 +1,54 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-  <title>Banco de Dados da Escola Generation Brasil</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gerenciamento de Alunos</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link para seu arquivo CSS (se houver) -->
 </head>
 <body>
-  <!-- Elementos da interface do usuário -->
-  <script src="client.js"></script>
+    <header>
+        <h1>Sistema de Gerenciamento de Alunos</h1>
+    </header>
+    
+    <main>
+        <section id="alunos-list">
+            <h2>Lista de Alunos</h2>
+            <ul>
+                <!-- Os alunos serão carregados dinamicamente aqui usando JavaScript -->
+            </ul>
+        </section>
+        
+        <section id="aluno-form">
+            <h2>Adicionar/Editar Aluno</h2>
+            <form id="aluno-form">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" required>
+                
+                <label for="idade">Idade:</label>
+                <input type="number" id="idade" required>
+                
+                <label for="nota_primeiro_semestre">Nota do 1º Semestre:</label>
+                <input type="number" id="nota_primeiro_semestre" step="0.01" required>
+                
+                <label for="nota_segundo_semestre">Nota do 2º Semestre:</label>
+                <input type="number" id="nota_segundo_semestre" step="0.01" required>
+                
+                <label for="nome_professor">Nome do Professor:</label>
+                <input type="text" id="nome_professor" required>
+                
+                <label for="sala">Sala:</label>
+                <input type="text" id="sala" required>
+                
+                <button type="submit">Salvar</button>
+            </form>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2023 Sua Empresa. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="app.js"></script> <!-- Link para seu arquivo JavaScript (se houver) -->
 </body>
 </html>
