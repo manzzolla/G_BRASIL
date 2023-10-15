@@ -96,7 +96,7 @@ function criarAluno() {
   }
   
   // Chame a função listarAlunos para carregar a lista inicial
-  app.get('/alunos', (req, res) => {
+  app.get('https://generation-brasil.onrender.com/alunos', (req, res) => {
     // Suponha que 'alunos' é um array de objetos JSON
     const alunos = [
       { nome: 'Alice', idade: 20 },
