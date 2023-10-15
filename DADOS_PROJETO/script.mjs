@@ -1,10 +1,8 @@
 import express from 'express';
-const cors = require('cors');
+import cors from 'cors';
+import { createServer } from 'http';
+
 const app = express();
-const fetch = require('node-fetch');
-
-
-
 app.use(cors());
 app.use(express.json());
 
