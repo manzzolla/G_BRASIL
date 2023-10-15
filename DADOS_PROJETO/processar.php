@@ -12,31 +12,29 @@ if (!$connection) {
     die("Falha na conexão com o banco de dados: " . pg_last_error());
 }
 
-// Exemplo de inserção de dados
-$query = "INSERT INTO Alunos (nome, idade, nota_primeiro_semestre, nota_segundo_semestre, nome_professor, sala)
-          VALUES ('João', 25, 8.5, 9.2, 'Professor A', 'Sala 101')";
-$result = pg_query($connection, $query);
-if (!$result) {
-    echo "Falha ao inserir os dados: " . pg_last_error();
-}
+// Verifica se o formulário foi submetido
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Receba os dados do formulário
+    $nome = $_POST['nome'];
+    $idade = $_POST['idade'];
+    $nota_primeiro_semestre = $_POST['nota_primeiro_semestre'];
+    $nota_segundo_semestre = $_POST['nota_segundo_semestre'];
+    $nome_professor = $_POST['nome_professor'];
+    $sala = $_POST['sala'];
 
-// Exemplo de seleção de dados
-$query = "SELECT * FROM Alunos";
-$result = pg_query($connection, $query);
-if (!$result) {
-    echo "Falha ao selecionar os dados: " . pg_last_error();
-} else {
-    while ($row = pg_fetch_assoc($result)) {
-        echo "ID: " . $row['id'] . "<br>";
-        echo "Nome: " . $row['nome'] . "<br>";
-        echo "Idade: " . $row['idade'] . "<br>";
-        echo "Nota 1º Semestre: " . $row['nota_primeiro_semestre'] . "<br>";
-        echo "Nota 2º Semestre: " . $row['nota_segundo_semestre'] . "<br>";
-        echo "Nome do Professor: " . $row['nome_professor'] . "<br>";
-        echo "Sala: " . $row['sala'] . "<br><br>";
+    // Insira os dados na tabela
+    $query = "INSERT INTO sua_tabela (nome, idade, nota_primeiro_semestre, nota_segundo_semestre, nome_professor, sala)
+              VALUES ('$nome', $idade, $nota_primeiro_semestre, $nota_segundo_semestre, '$nome_professor', '$sala')";
+    
+    $result = pg_query($connection, $query);
+
+    if ($result) {
+        echo "Dados inseridos com sucesso.";
+    } else {
+        echo "Erro ao inserir dados: " . pg_last_error();
     }
 }
 
-// Fechar a conexão com o banco de dados
+// Feche a conexão com o banco de dados
 pg_close($connection);
 ?>
