@@ -14,16 +14,16 @@ if (!$connection) {
 
 // Verifica se o formulário foi submetido
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Receba os dados do formulário
-    $nome = $_POST['nome'];
-    $idade = $_POST['idade'];
-    $nota_primeiro_semestre = $_POST['nota_primeiro_semestre'];
-    $nota_segundo_semestre = $_POST['nota_segundo_semestre'];
-    $nome_professor = $_POST['nome_professor'];
-    $sala = $_POST['sala'];
+    // Receba os dados do formulário e valide-os
+    $nome = pg_escape_string($connection, $_POST['nome']);
+    $idade = (int)$_POST['idade'];
+    $nota_primeiro_semestre = (float)$_POST['nota_primeiro_semestre'];
+    $nota_segundo_semestre = (float)$_POST['nota_segundo_semestre'];
+    $nome_professor = pg_escape_string($connection, $_POST['nome_professor']);
+    $sala = pg_escape_string($connection, $_POST['sala']);
 
-    // Insira os dados na tabela
-    $query = "INSERT INTO sua_tabela (nome, idade, nota_primeiro_semestre, nota_segundo_semestre, nome_professor, sala)
+    // Insira os dados na tabela (substitua 'sua_tabela' pelo nome real da tabela)
+    $query = "INSERT INTO Alunos (nome, idade, nota_primeiro_semestre, nota_segundo_semestre, nome_professor, sala)
               VALUES ('$nome', $idade, $nota_primeiro_semestre, $nota_segundo_semestre, '$nome_professor', '$sala')";
     
     $result = pg_query($connection, $query);
