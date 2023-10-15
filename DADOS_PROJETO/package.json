@@ -1,5 +1,5 @@
 {
-  "type": "module",
+  "type": "commonjs",
   "name": "app",
   "version": "1.0.0",
   "description": "Banco de dados da escola de alunos Generation Brasil",
