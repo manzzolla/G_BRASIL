@@ -96,5 +96,15 @@ function criarAluno() {
   }
   
   // Chame a função listarAlunos para carregar a lista inicial
-  listarAlunos();
+  app.get('/alunos', (req, res) => {
+    // Suponha que 'alunos' é um array de objetos JSON
+    const alunos = [
+      { nome: 'Alice', idade: 20 },
+      { nome: 'Bob', idade: 22 },
+      // Outros alunos...
+    ];
+  
+    // Responder com a lista de alunos em formato JSON
+    res.json(alunos);
+  });
   
