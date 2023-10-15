@@ -13,10 +13,10 @@
     
     <main>
         <section id="alunos-list">
-            <h2>Lista de Alunos</h2>
-            <ul>
-                <!-- Os alunos serão carregados dinamicamente aqui usando JavaScript -->
-            </ul>
+          <h2>Lista de Alunos</h2>
+          <ul id="lista-alunos">
+            <!-- Os alunos serão carregados dinamicamente aqui usando JavaScript -->
+           </ul>
         </section>
         
         <section id="aluno-form">
@@ -49,6 +49,28 @@
         <p>&copy; Mzl Soluções em Tecnologia. Todos os direitos reservados.</p>
     </footer>
 
-    <script src="app.mjs"></script> <!-- Link para seu arquivo JavaScript (se houver) -->
+    <script>
+      function carregarAlunos() {
+    fetch('https://escola-db.onrender.com/alunos')
+        .then((response) => response.json())
+        .then((alunos) => {
+            const listaAlunos = document.querySelector('#lista-alunos');
+            listaAlunos.innerHTML = '';
+
+            alunos.forEach((aluno) => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `Nome: ${aluno.nome}, Idade: ${aluno.idade}, Nota 1º Semestre: ${aluno.nota_primeiro_semestre}, Nota 2º Semestre: ${aluno.nota_segundo_semestre}`;
+                listaAlunos.appendChild(listItem);
+            });
+        })
+        .catch((error) => {
+            console.error('Erro ao carregar alunos:', error);
+        });
+}
+
+// Chame a função para carregar os alunos quando a página carregar
+window.addEventListener('load', carregarAlunos);
+      
+    </script>
 </body>
 </html>
