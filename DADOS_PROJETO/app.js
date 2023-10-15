@@ -1,4 +1,4 @@
-const express = require('express');
+import express from 'express';
 const { Pool } = require('pg');
 const app = express();
 const port = process.env.PORT || 3000;
