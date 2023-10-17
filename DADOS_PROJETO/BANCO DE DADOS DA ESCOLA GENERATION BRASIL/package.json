@@ -1,5 +1,4 @@
 {
-  "type": "module",
   "name": "dbgeneration",
   "version": "0.0.0",
   "description": "BANCO DE DADOS DA ESCOLA GENERATION BRASIL",
@@ -10,6 +9,7 @@
   },
   "eslintConfig": {},
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.18.2",
     "git": "^0.1.5",
     "install": "^0.13.0",
