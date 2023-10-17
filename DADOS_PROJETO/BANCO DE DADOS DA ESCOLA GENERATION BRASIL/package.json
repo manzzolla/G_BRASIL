@@ -1,5 +1,5 @@
 {
-  "type": "commonjs",
+  "type": "module",
   "name": "dbgeneration",
   "version": "0.0.0",
   "description": "BANCO DE DADOS DA ESCOLA GENERATION BRASIL",
