@@ -1,8 +1,9 @@
 {
+  "type": "commonjs",
   "name": "dbgeneration",
   "version": "0.0.0",
   "description": "BANCO DE DADOS DA ESCOLA GENERATION BRASIL",
-  "main": "server.js",
+  "main": "server.cjs",
   "author": "Manzzolla",
   "devDependencies": {
     "eslint": "^8.21.0"
@@ -16,7 +17,7 @@
     "pg-promise": "^11.5.4"
   },
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.cjs"
   },
   "repository": {
     "type": "git",

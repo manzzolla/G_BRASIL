@@ -1,0 +1,15 @@
+{
+  "name": "dbgeneration",
+  "version": "1.0.0",
+  "description": "Banco de Dados ESCOLA V2",
+  "main": "server.cjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "DADOS_PROJETO"
+  },
+  "author": "Manzzolla",
+  "license": "(MIT OR GPL-3.0)"
+}

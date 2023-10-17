@@ -1,0 +1,3 @@
+C:\Users\manzz\source\repos\manzzolla\G_BRASIL\DADOS_PROJETO\BANCO DE DADOS DA ESCOLA GENERATION BRASIL\obj\Debug\BANCO DE DADOS DA ESCOLA GENERATION BRASIL.njsproj.AssemblyReference.cache
+C:\Users\manzz\source\repos\manzzolla\G_BRASIL\DADOS_PROJETO\BANCO DE DADOS DA ESCOLA GENERATION BRASIL\obj\Debug\BANCO DE DADOS DA ESCOLA GENERATION BRASIL.njsproj.CoreCompileInputs.cache
+C:\Users\manzz\source\repos\manzzolla\G_BRASIL\DADOS_PROJETO\BANCO DE DADOS DA ESCOLA GENERATION BRASIL\bin\Microsoft.NodejsTools.WebRole.dll
