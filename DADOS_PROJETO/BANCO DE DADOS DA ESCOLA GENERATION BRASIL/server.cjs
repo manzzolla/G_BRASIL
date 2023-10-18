@@ -10,6 +10,11 @@ app.use(express.json());
 // Dados simulados de alunos 
 const alunos = [];
 
+const publicDirectory = path.join(__dirname); // Usa __dirname para representar o diretório atual.
+
+// Configura o middleware 'express.static' para servir arquivos estáticos a partir do diretório raiz do projeto.
+app.use(express.static(publicDirectory));
+
 // Rota para listar todos os alunos
 app.get('/alunos', (req, res) => {
     res.json(alunos);
