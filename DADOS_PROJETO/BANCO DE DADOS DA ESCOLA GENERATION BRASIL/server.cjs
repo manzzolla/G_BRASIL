@@ -16,7 +16,7 @@ const publicDirectory = path.join(__dirname);
 const alunos = [];
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.php');
+    res.sendFile(__dirname + '/index.html');
 });
 
 // Configura o middleware 'express.static' para servir arquivos estáticos a partir do diretório raiz do projeto.
