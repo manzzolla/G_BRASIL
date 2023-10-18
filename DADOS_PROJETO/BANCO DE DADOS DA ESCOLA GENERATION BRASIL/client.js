@@ -18,7 +18,7 @@ function criarAluno() {
         sala,
     };
 
-    fetch('https://db-escola.onrender.com/alunos', {
+    fetch('https://escola-db.onrender.com/alunos', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -43,7 +43,7 @@ function criarAluno() {
 
 // Função para listar alunos
 function listarAlunos() {
-    fetch('https://db-escola.onrender.com/alunos')
+    fetch('https://escola-db.onrender.com/alunos')
         .then((response) => response.json())
         .then((alunos) => {
             const tabela = document.getElementById('alunos-table');
@@ -75,7 +75,7 @@ function listarAlunos() {
 
 // Função para excluir um aluno
 function excluirAluno(id) {
-    fetch(`https://db-escola.onrender.com/alunos/${id}`, {
+    fetch(`https://escola-db.onrender.com/alunos/${id}`, {
         method: 'DELETE',
     })
         .then(() => {
@@ -96,7 +96,7 @@ function editarAluno(id) {
 }
 
 // Chame a função listarAlunos para carregar a lista inicial
-app.get('https://db-escola.onrender.com/alunos', (req, res) => {
+app.get('https://escola-db.onrender.com/alunos', (req, res) => {
     // Suponha que 'alunos' é um array de objetos JSON
     const alunos = [
         { nome: 'Alice', idade: 20 },
