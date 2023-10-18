@@ -1,82 +1,36 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Gerenciamento de Alunos</title>
-    <link rel="stylesheet" type="text/css" href="styles.css"> <!-- Link para seu arquivo CSS (se houver) -->
+    <title>Banco de Dados da Escola</title>
 </head>
 <body>
-    <header>
-        <h1>Sistema de Gerenciamento de Alunos</h1>
-    </header>
+    <h1>Dados do Banco de Dados</h1>
+    <div id="alunos">
+        <?php
+        // Configuração da conexão com o banco de dados
+        $host = "dpg-ckjjl99jrl0c73dfbakg-a.oregon-postgres.render.com";
+        $port = "5432";
+        $dbname = "banco_de_dados_escola";
+        $user = "banco_de_dados_escola_user";
+        $password = "OT3KvnLC880SWkCIWPwiftUYvJpUVS9h";
 
-    <main>
-        <section id="alunos-list">
-            <h2>Lista de Alunos</h2>
-            <ul id="lista-alunos">
-                <!-- Os alunos serão carregados dinamicamente aqui usando JavaScript -->
-            </ul>
-        </section>
+        $conn = pg_connect("host=$host port=$port dbname=$dbname user=$user password=$password");
+        if (!$conn) {
+        die("Erro na conexão com o banco de dados");
+        }
 
-        <section id="aluno-form">
-            <h2>Adicionar/Editar Aluno</h2>
-            <form action="processar.php" method="post">
-                <label for="nome">Nome:</label>
-                <input type="text" id="nome" name="nome" required>
+        $query = "SELECT * FROM alunos";
+        $result = pg_query($conn, $query);
+        if (!$result) {
+        die("Erro na consulta SQL: " . pg_last_error());
+        }
 
-                <label for="idade">Idade:</label>
-                <input type="number" id="idade" name="idade" required>
+        while ($row = pg_fetch_assoc($result)) {
+        echo "Nome: " . $row['nome'] . " - Idade: " . $row['idade'] . "<br>";
+        }
 
-                <label for="nota_primeiro_semestre">Nota do 1º Semestre:</label>
-                <input type="number" id="nota_primeiro_semestre" name="nota_primeiro_semestre" step="0.01" required>
-
-                <label for="nota_segundo_semestre">Nota do 2º Semestre:</label>
-                <input type="number" id="nota_segundo_semestre" name="nota_segundo_semestre" step="0.01" required>
-
-                <label for="nome_professor">Nome do Professor:</label>
-                <input type="text" id="nome_professor" name="nome_professor" required>
-
-                <label for="sala">Sala:</label>
-                <input type="text" id="sala" name="sala" required>
-
-                <button type="submit">Salvar</button>
-            </form>
-            <!-- Mensagem de confirmação após a submissão -->
-            <?php
-            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            echo "<p>Os dados foram inseridos com sucesso!</p>";
-            }
-            ?>
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; Mzl Soluções em Tecnologia. Todos os direitos reservados.</p>
-    </footer>
-
-    <script>
-      // Função para carregar alunos
-      function carregarAlunos() {
-          fetch('https://db-escola.onrender.com/alunos')
-            .then((response) => response.json())
-            .then((alunos) => {
-                const listaAlunos = document.querySelector('#lista-alunos');
-                listaAlunos.innerHTML = '';
-
-                alunos.forEach((aluno) => {
-                    const listItem = document.createElement('li');
-                    listItem.textContent = `Nome: ${aluno.nome}, Idade: ${aluno.idade}, Nota 1º Semestre: ${aluno.nota_primeiro_semestre}, Nota 2º Semestre: ${aluno.nota_segundo_semestre}`;
-                    listaAlunos.appendChild(listItem);
-                });
-            })
-            .catch((error) => {
-                console.error('Erro ao carregar alunos:', error);
-            });
-      }
-
-      // Chame a função para carregar os alunos quando a página carregar
-      window.addEventListener('load', carregarAlunos);
-    </script>
+        pg_close($conn);
+        ?>
+    </div>
 </body>
 </html>
