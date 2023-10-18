@@ -58,7 +58,7 @@
     <script>
       // Função para carregar alunos
       function carregarAlunos() {
-        fetch('https://escola-db.onrender.com/alunos')
+          fetch('https://db-escola.onrender.com/alunos')
             .then((response) => response.json())
             .then((alunos) => {
                 const listaAlunos = document.querySelector('#lista-alunos');
