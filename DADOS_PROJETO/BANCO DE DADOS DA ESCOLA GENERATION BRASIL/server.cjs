@@ -40,7 +40,6 @@ app.get('/alunos', (req, res) => {
             res.json(results.rows);
         }
     });
-});
 
 // Rota para criar um novo aluno
 app.post('/alunos', (req, res) => {
@@ -56,7 +55,6 @@ app.post('/alunos', (req, res) => {
             res.json(result.rows[0]);
         }
     });
-});
 
 // Rota para excluir um aluno pelo ID
 app.delete('/alunos/:id', (req, res) => {
@@ -74,7 +72,6 @@ app.delete('/alunos/:id', (req, res) => {
             res.json(result.rows[0]);
         }
     });
-});
 });
 
 // Rota para editar um aluno pelo ID 
@@ -94,7 +91,7 @@ app.put('/alunos/:id', (req, res) => {
             res.json(result.rows[0]);
         }
     });
-});
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
