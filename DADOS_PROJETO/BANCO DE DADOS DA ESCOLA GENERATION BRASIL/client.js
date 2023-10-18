@@ -1,5 +1,3 @@
-// Código do lado do cliente (client.js)
-
 // Função para criar um novo aluno
 function criarAluno() {
     const nome = document.getElementById('nome').value;
@@ -85,25 +83,16 @@ function excluirAluno(id) {
         .catch((error) => {
             console.error(`Erro ao excluir aluno com ID ${id}:`, error);
         }
-        );
+    );
 }
 
-// Função para editar um aluno 
+// Função para editar um aluno
 function editarAluno(id) {
-    // Aqui você pode implementar a lógica para editar um aluno
-    // Pode ser através de um formulário de edição ou outra interface
+    // Aqui você deve implementar a lógica para permitir a edição do aluno.
+    // Isso pode envolver a exibição de um formulário de edição preenchido com os detalhes do aluno.
+    // Você pode definir uma função separada para lidar com a edição do aluno.
     console.log(`Editar aluno com ID ${id}`);
 }
 
-// Chame a função listarAlunos para carregar a lista inicial
-app.get('https://escola-db.onrender.com/alunos', (req, res) => {
-    // Suponha que 'alunos' é um array de objetos JSON
-    const alunos = [
-        { nome: 'Alice', idade: 20 },
-        { nome: 'Bob', idade: 22 },
-        // Outros alunos...
-    ];
-
-    // Responder com a lista de alunos em formato JSON
-    res.json(alunos);
-});
+// Chame a função listarAlunos para carregar a lista inicial quando a página for carregada
+listarAlunos();
